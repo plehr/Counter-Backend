@@ -1,0 +1,4 @@
+<h1><%= @event.title %></h1>
+<h4>Angelegt von: <%= @event.user.email %></h4>
+
+<%= distance_of_time_in_words(@event.moment, Time.now) %>

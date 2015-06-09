@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users
+  
+  scope "(:locale)", :locale => /(de|en)/ do 
+    scope "/events" do
+      get "/", :to => "event#list"
+      get "/new", :to => "event#new"
+       post "/create", :to => "event#create"
+      get "/:id", :to => "event#view"
+     
+      
+    end
+  end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

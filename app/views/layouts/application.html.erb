@@ -4,10 +4,25 @@
   <title>Workspace</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user %>
+ Hallo: <%= current_user.email %>
+<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+<% end %>
 
+<% if current_admin_user %>
+ Hallo Admin: <%= current_admin_user.email %>
+<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+<% end %>
+
+<% if flash %>
+    <% flash.keys.each do |key| %>
+        <div class="notification <%= key %>"><%= flash[key] %></div>
+    <% end %>
+<% end %>
 <%= yield %>
 
 </body>
